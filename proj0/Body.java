@@ -59,6 +59,8 @@ public class Body{
         double boostY = forceBooster * Math.sin(direction);
         double[] netBoost = new double[2];
 
+        netBoost[0] = boostX;
+        netBoost[1] = boostY;
 
 
         return netBoost;
