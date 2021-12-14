@@ -12,7 +12,7 @@ public class Body{
     public double forceBooster;
 
     public void draw(){
-        StdDraw.picture(this.xxPos, this.yyPos, "images/" + this.imgFileName, direction);
+        StdDraw.picture(this.xxPos, this.yyPos, "images/" + this.imgFileName, Math.toDegrees(direction)-90);
     }
     public Body(double xP, double yP, double xV, double yV, double m, String img){
         this.xxPos = xP;
@@ -48,46 +48,18 @@ public class Body{
         double yDiff = mouseY - this.yyPos;
         
         double angle = 0;
-        if (xDiff > 0 & yDiff > 0) {
-            angle = Math.toDegrees(Math.atan(yDiff/xDiff)) + 270;
-        }
-        else if (xDiff < 0 & yDiff < 0){
-            angle = Math.toDegrees(Math.atan(yDiff/xDiff)) + 90;
-        }
-        else if (xDiff > 0 & yDiff < 0){
-            angle = Math.toDegrees(Math.atan(yDiff/xDiff)) + 270;
-        }
-        else if (xDiff < 0 & yDiff > 0){
-            angle = Math.toDegrees(Math.atan(yDiff/xDiff)) + 90;
-        }
+        angle = Math.atan2(yDiff, xDiff);
         direction = angle;
         return angle;
     }
 
+
     public double[] propulsionForce(){
-        double boostX = forceBooster * Math.pow(Math.cos(direction), 2);
-        double boostY = forceBooster * Math.pow(Math.sin(direction), 2);
+        double boostX = forceBooster * Math.cos(direction);
+        double boostY = forceBooster * Math.sin(direction);
         double[] netBoost = new double[2];
-        
-        if (this.direction >= 0 & this.direction < 90){
-            netBoost[0] = -boostX;
-            netBoost[1] = boostY;
-        }
- 
-        else if (this.direction < 270 & this.direction >=180){
-            netBoost[0] = boostX;
-            netBoost[1] = -boostY;
-        }
 
-        else if (this.direction < 180 & this.direction >=90){
-            netBoost[0] = -boostX;
-            netBoost[1] = -boostY;
-        }
 
-           else if (this.direction >= 270 & this.direction < 360) {
-        netBoost[0] =  boostX;
-        netBoost[1] =  boostY;
-           }
 
         return netBoost;
     }

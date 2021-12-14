@@ -45,7 +45,7 @@ public class NBody {
                 ShipY = Spaceship.propulsionForce()[1];
                 System.out.println("Num: " + (StdDraw.mouseX()) + " " + (StdDraw.mouseY()) + " "
                  + (Spaceship.xxPos) + " " + (Spaceship.yyPos) + " " + Spaceship.direction
-                 + " " + Spaceship.forceBooster + " Shipx: " + ShipX + " ShipY: " + ShipY);
+                 + " " + Spaceship.forceBooster + " Shipx: " + ShipX + " ShipY: " + ShipY + " " + Spaceship.forceBooster);
             }
             Spaceship.update(dt, ShipX, ShipY);
 
