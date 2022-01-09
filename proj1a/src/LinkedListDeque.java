@@ -1,5 +1,5 @@
 public class LinkedListDeque<T>{
-    public static class IntNode{
+    public class IntNode{
         public IntNode prev;
         public T item;
         public IntNode next;
@@ -48,7 +48,7 @@ public class LinkedListDeque<T>{
     }
     /* Evaluates if DLL is empty, meaning one sentinel node not connected to anything. */
     public boolean isEmpty() {
-        if (this.sentinel.next == null && this.sentinel.prev == null) {
+        if (this.sentinel.next == sentinel && this.sentinel.prev == sentinel) {
             return true;
         }
         return false;
@@ -67,22 +67,16 @@ public class LinkedListDeque<T>{
     }
     /* Remove first item from list and return it. */
     public T removeFirst(){
-        IntNode pointer = this.sentinel;
-        try{
-            return pointer.next.item;
-        }
-        catch(Exception e){
-            return null;
-        }
+        T itemVal = sentinel.next.item;
+        sentinel.next = sentinel.next.next;
+        sentinel.next.prev = sentinel;
+        return itemVal;
     }
     public T RemoveLast(){
-        IntNode pointer = this.sentinel;
-        try{
-            return pointer.prev.item;
-        }
-        catch(Exception e){
-            return null;
-        }
+        T itemVal = sentinel.next.item;
+        sentinel.next = sentinel.next.next;
+        sentinel.next.prev = sentinel;
+        return itemVal;
     }
     public T get(int index){
         int i = index;
