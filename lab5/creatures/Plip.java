@@ -10,6 +10,8 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Map;
 
+import static java.lang.Integer.parseInt;
+
 /**
  * An implementation of a motile pacifist photosynthesizer.
  *
@@ -17,6 +19,7 @@ import java.util.Map;
  */
 public class Plip extends Creature {
 
+    int maxE;
     /**
      * red color.
      */
@@ -30,15 +33,18 @@ public class Plip extends Creature {
      */
     private int b;
 
+
+
     /**
      * creates plip with energy equal to E.
      */
     public Plip(double e) {
         super("plip");
-        r = 0;
+        r = 99;
         g = 0;
-        b = 0;
+        b = 76;
         energy = e;
+        maxE = 2;
     }
 
     /**
@@ -57,7 +63,7 @@ public class Plip extends Creature {
      * that you get this exactly correct.
      */
     public Color color() {
-        g = 63;
+        g = (int) Math.round(63+(93*energy));
         return color(r, g, b);
     }
 
@@ -74,7 +80,10 @@ public class Plip extends Creature {
      * private static final variable. This is not required for this lab.
      */
     public void move() {
-        // TODO
+        energy -= 0.15;
+        if (energy < 0) {
+            energy = 0;
+        }
     }
 
 
@@ -82,7 +91,10 @@ public class Plip extends Creature {
      * Plips gain 0.2 energy when staying due to photosynthesis.
      */
     public void stay() {
-        // TODO
+        energy += 0.2;
+        if (energy > maxE) {
+            energy = 2;
+        }
     }
 
     /**
@@ -127,4 +139,6 @@ public class Plip extends Creature {
         // Rule 4
         return new Action(Action.ActionType.STAY);
     }
+
+
 }

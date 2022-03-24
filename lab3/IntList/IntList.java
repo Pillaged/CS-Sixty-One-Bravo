@@ -120,9 +120,6 @@ public class IntList {
 
 
 
-
-
-
     /**
      * DO NOT MODIFY ANYTHING BELOW THIS LINE! Many of the concepts below here
      * will be introduced later in the course or feature some form of advanced
@@ -243,6 +240,22 @@ public class IntList {
         }
         out.format(")");
         return out.toString();
+    }
+
+    public static IntList reverse(IntList input) {
+        if (input == null) {
+            return null;
+        }
+        IntList A = new IntList(input.first, input.rest);
+        IntList backwards = new IntList();
+        while (A.rest != null) {
+            backwards.rest = new IntList(A.first, backwards.rest);
+            A = A.rest;
+        }
+        backwards.first = A.first;
+        input.first = backwards.first;
+        input.rest = backwards.rest;
+        return input;
     }
 }
 
